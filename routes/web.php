@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\{
     ActivityLogController,
     DashboardController,
     CategoryController,
+    DestinationController,
     UserController,
     VehicleController
 };
@@ -53,6 +54,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get('dashboard', DashboardController::class)->name('dashboard.index');
     Route::resource('categories', CategoryController::class);
     Route::resource('vehicles', VehicleController::class);
+    Route::resource('destinations', DestinationController::class);
     
     Route::resource('users', UserController::class);
 

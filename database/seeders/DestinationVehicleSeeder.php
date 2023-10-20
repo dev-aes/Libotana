@@ -18,12 +18,34 @@ class DestinationVehicleSeeder extends Seeder
     {
         $destination_vehicles = array(
 
-            // Marquee Mall - Pandan Jeep
             [
                 'id' => 1,
                 'destination_id' => 1,
                 'vehicle_id' => 1,
-                'duration' => '30 min',
+                'duration' => '50 min',
+                'created_at' => now(),
+            ],
+            [
+                'id' => 2,
+                'destination_id' => 1,
+                'vehicle_id' => 2,
+                'duration' => '50 min',
+                'created_at' => now(),
+            ],
+            [
+                'id' => 3,
+                'destination_id' => 1,
+                'vehicle_id' => 3,
+                'duration' => '50 min',
+                'created_at' => now(),
+            ],
+
+
+            [
+                'id' => 4,
+                'destination_id' => 2,
+                'vehicle_id' => 1,
+                'duration' => '50 min',
                 'created_at' => now(),
             ],
         );

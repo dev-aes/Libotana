@@ -24,3 +24,4 @@
 <link href="{{ asset('assets/css/utils/buttons.bootstrap4.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/utils/select2.min.css') }}" rel="stylesheet" /> {{-- Select --}}
 <link href="{{ asset('assets/css/utils/toastr.min.css') }}" rel="stylesheet" /> {{-- Notif --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" /> {{-- Lightbox --}}

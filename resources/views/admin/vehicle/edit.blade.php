@@ -26,46 +26,45 @@
                             <div class="col-md-8">
                                 <br>
                                 @include('layouts.includes.alert')
-                                <form class="row" action="{{ route('admin.vehicles.update', $vehicle) }}" method="post"
+                                <form action="{{ route('admin.vehicles.update', $vehicle) }}" method="post"
                                     enctype="multipart/form-data" id="vehicle_form">
                                     @csrf @method('PUT')
-                                    <div class="col-md-10">
 
-                                        <div class="form-group mb-2">
-                                            <label class="form-label">Category *</label>
-                                            <select class="form-control" name="category_id" required>
-                                                <option value=""></option>
-                                                @foreach ($categories as $id => $category)
-                                                    <option value="{{ $id }}"
-                                                        @if ($vehicle->category_id == $id) selected @endif>
-                                                        {{ $category }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group mb-2">
-                                            <label class="form-label">Model *</label>
-                                            <input type="text" class="form-control" name="name"
-                                                placeholder="Ex. Jeep Name or Tricycle Name" value="{{ $vehicle->name }}"
-                                                required>
-                                        </div>
-
-                                        <div class="form-group mb-3">
-                                            <label class="form-label">Routes *</label>
-                                            <input type="text" class="form-control" name="routes"
-                                                placeholder="Ex. Sto. domingo - Lapieta - Pulungbulu - Holy Angel - Nepo Mart"
-                                                value="{{ $vehicle->routes }}" required>
-                                        </div>
-
-                                        <div>
-                                            <input type="file" class="featured_photo" name="featured_photo">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <button type="button" class="btn btn-primary"
-                                                onclick="promptUpdate(event, '#vehicle_form')">Save</button>
-                                        </div>
+                                    <div class="form-group mb-2">
+                                        <label class="form-label">Category *</label>
+                                        <select class="form-control" name="category_id" required>
+                                            <option value=""></option>
+                                            @foreach ($categories as $id => $category)
+                                                <option value="{{ $id }}"
+                                                    @if ($vehicle->category_id == $id) selected @endif>
+                                                    {{ $category }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label">Model *</label>
+                                        <input type="text" class="form-control" name="name"
+                                            placeholder="Ex. Jeep Name or Tricycle Name" value="{{ $vehicle->name }}"
+                                            required>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Routes *</label>
+                                        <input type="text" class="form-control" name="routes"
+                                            placeholder="Ex. Sto. domingo - Lapieta - Pulungbulu - Holy Angel - Nepo Mart"
+                                            value="{{ $vehicle->routes }}" required>
+                                    </div>
+
+                                    <div>
+                                        <input type="file" class="featured_photo" name="featured_photo">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-primary btn-sm w-100"
+                                            onclick="promptUpdate(event, '#vehicle_form', 'Do you want to Update?', 'Note: If you upload a new set of images it will overwrite the existing one.', 'Yes')">Save</button>
+                                    </div>
+
                                 </form>
                             </div>
                             <div class="col-md-4">

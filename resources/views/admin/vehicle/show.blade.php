@@ -11,21 +11,22 @@
 <div class="container-fluid mt-3">
     @include('layouts.includes.alert')
 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ route('admin.vehicles.index') }}">
+                    All Vehicles
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ $vehicle->name }}
+            </li>
+        </ol>
+    </nav>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card card-body">
-
-                <div class="border-0 d-flex justify-content-between">
-                    <a href="{{ route('admin.vehicles.index') }}">
-                        <i class="fas fa-chevron-left fa-lg"></i>
-                    </a>
-                    <div>
-                        <i class="far fa-heart fa-lg mr-1"></i>
-                        <i class="fas fa-share-alt fa-lg"></i>
-                    </div>
-                </div>
-                <br>
-
 
                 {{-- Start Carousel --}}
                 <div id="other_featured_photos" class="carousel slide" data-ride="carousel">
@@ -71,21 +72,32 @@
                     {{ $vehicle->routes }}
 
                 </div>
-
-                <br>
-                <h3>Destinations</h3>
+                <hr>
+                <h3>Tourist Destinations <i class="fas fa-map-marked-alt ml-1"></i></h3> <br>
                 <div class="row">
                     @forelse ($vehicle->destinations as $destination)
-                        <div class="col-4 px-2">
-                            <div class="card card-body px-0 py-2 text-center">
-                                <h5 class="text-muted">Destination</h5>
-                                <h4>{{ $destination->title }}</h4>
+                        <div class="col-6 col-md-4 px-2 d-flex align-self-stretch">
+                            <div class="card w-100">
+                                <div class="card-body px-0 py-0 text-center d-flex and flex-column">
+                                    <img class="img-fluid" src="{{ handleNullImage($destination->featured_photo) }}"
+                                        alt="featured photo">
+                                </div>
+                                <div class="card-footer border-0">
+                                    <a href="{{ route('admin.destinations.show', $destination) }}">
+                                        <small>{{ $destination->title }} <i
+                                                class="fas fa-map-pin ml-1 text-danger"></i></small>
+                                    </a>
+                                    <br><br>
+                                    <small>
+                                        Address: {{ $destination->address }}
+                                    </small>
+                                </div>
                             </div>
                         </div>
 
                     @empty
 
-                        <div class="col-4 px-2">
+                        <div class="col-12 px-2">
                             <div class="card card-body px-0 py-2 text-center">
                                 Record Not Found
                             </div>

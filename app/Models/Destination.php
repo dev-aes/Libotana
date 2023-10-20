@@ -17,16 +17,17 @@ class Destination extends Model implements HasMedia
 
     protected $fillable = [
         'title',
-        'history',
+        'address',
         'latitude',
         'longitude',
+        'history',
     ];
 
     // ==============================Relationship==================================================
     
     public function vehicles():BelongsToMany
     {
-        return $this->belongsToMany(Vehicle::class)->withTimestamps()->using(DestinationVehicle::class);
+        return $this->belongsToMany(Vehicle::class)->withPivot('duration')->withTimestamps()->using(DestinationVehicle::class);
     }
 
     // ============================== Accessor & Mutator ==========================================

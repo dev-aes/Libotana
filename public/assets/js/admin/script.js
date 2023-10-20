@@ -50,7 +50,7 @@ $(() => {
         c_index($(".category_dt"), route("admin.categories.index"), columns);
     }
 
-    // Car
+    // Vehicle
     if (window.location.href === route("admin.vehicles.index")) {
         const columns = [
             {
@@ -88,6 +88,53 @@ $(() => {
             { data: "actions", orderable: false, searchable: false },
         ];
         c_index($(".vehicle_dt"), route("admin.vehicles.index"), columns);
+    }
+
+    // Destination
+    if (window.location.href === route("admin.destinations.index")) {
+        const columns = [
+            {
+                data: "id",
+                render(data, type, row) {
+                    return row.DT_RowIndex;
+                },
+            },
+            {
+                data: "featured_photo",
+                render(data, type, row) {
+                    let route_show = route("admin.destinations.show", row.id);
+                    return `<a href='${route_show}'> ${handleCareImage(
+                        data,
+                        "",
+                        150
+                    )} </a>`;
+                },
+            },
+            {
+                data: "title",
+                render(data, type, row) {
+                    let route_show = route("admin.destinations.show", row.id);
+
+                    return `<a href='${route_show}'>${data}</a>`;
+                },
+            },
+            { data: "history" },
+            { data: "latitude" },
+            { data: "longitude" },
+
+            {
+                data: "created_at",
+                render(data) {
+                    return formatDate(data, "full");
+                },
+            },
+            { data: "actions", orderable: false, searchable: false },
+        ];
+        c_index(
+            $(".destination_dt"),
+            route("admin.destinations.index"),
+            columns
+        );
     }
 
     //User;
@@ -138,3 +185,63 @@ $(() => {
 
 //=========================================================
 // Custom Functions()
+document.addEventListener("DOMContentLoaded", function (event) {
+    // initiate global glightbox
+
+    setTimeout(() => {
+        GLightbox({
+            selector: ".glightbox",
+        });
+    }, 1000);
+});
+
+/**
+ * get all vehicle by category
+ * @param {*} category
+ */
+function filterVehicleByCategory(category) {
+    const columns = [
+        {
+            data: "id",
+            render(data, type, row) {
+                return row.DT_RowIndex;
+            },
+        },
+        {
+            data: "featured_photo",
+            render(data, type, row) {
+                let route_show = route("admin.vehicles.show", row.id);
+                return `<a href='${route_show}'> ${handleCareImage(
+                    data,
+                    "",
+                    150
+                )} </a>`;
+            },
+        },
+        { data: "category" },
+        {
+            data: "name",
+            render(data, type, row) {
+                let route_show = route("admin.vehicles.show", row.id);
+
+                return `<a href='${route_show}'>${data}</a>`;
+            },
+        },
+        {
+            data: "created_at",
+            render(data) {
+                return formatDate(data, "full");
+            },
+        },
+        { data: "actions", orderable: false, searchable: false },
+    ];
+    c_index(
+        $(".vehicle_dt"),
+        route("admin.vehicles.index", {
+            category: category.value,
+        }),
+        columns,
+        null,
+        true
+    );
+}

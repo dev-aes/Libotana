@@ -71,6 +71,14 @@
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link @if (Route::is('admin.destinations.*')) active @endif"
+                                href="{{ route('admin.destinations.index') }}">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="nav-link-text">Destination Management</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link @if (Route::is('admin.users.*')) active @endif"
                                 href="{{ route('admin.users.index') }}">
                                 <i class="fas fa-user-cog"></i>

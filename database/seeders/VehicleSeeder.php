@@ -20,7 +20,7 @@ class VehicleSeeder extends Seeder
             [
                 'id' => 1,
                 'category_id' => 1,
-                'name' => 'jeepney A',
+                'name' => 'Main Gate',
                 'routes' => 'MainGate - Friendship',
                 'terminal' => 'N/A',
                 'created_at' => now(),
@@ -28,7 +28,7 @@ class VehicleSeeder extends Seeder
             [
                 'id' => 2,
                 'category_id' => 1,
-                'name' => 'jeepney B',
+                'name' => 'Cpoint Balibago',
                 'routes' => 'Checkpoint - Balibago - Hiway',
                 'terminal' => 'N/A',
                 'created_at' => now(),
@@ -36,7 +36,7 @@ class VehicleSeeder extends Seeder
             [
                 'id' => 3,
                 'category_id' => 1,
-                'name' => 'jeepney C',
+                'name' => 'Hensonville',
                 'routes' => 'Checkpoint - Hensonville - Holy',
                 'terminal' => 'N/A',
                 'created_at' => now(),
@@ -44,7 +44,7 @@ class VehicleSeeder extends Seeder
             [
                 'id' => 4,
                 'category_id' => 1,
-                'name' => 'jeepney D',
+                'name' => 'Cpoint Holy Highway',
                 'routes' => 'SM - Checkpoint - Holy - Highway',
                 'terminal' => 'N/A',
                 'created_at' => now(),
@@ -52,7 +52,7 @@ class VehicleSeeder extends Seeder
             [
                 'id' => 5,
                 'category_id' => 1,
-                'name' => 'jeepney E',
+                'name' => 'DAU',
                 'routes' => 'Clark - Maingate - DAU',
                 'terminal' => 'N/A',
                 'created_at' => now(),
@@ -60,7 +60,7 @@ class VehicleSeeder extends Seeder
             [
                 'id' => 6,
                 'category_id' => 1,
-                'name' => 'jeepney F',
+                'name' => 'Marisol',
                 'routes' => 'Marisol - Pampangaa',
                 'terminal' => 'N/A',
                 'created_at' => now(),
@@ -68,7 +68,7 @@ class VehicleSeeder extends Seeder
             [
                 'id' => 7,
                 'category_id' => 1,
-                'name' => 'jeepney G',
+                'name' => 'Sapangbato',
                 'routes' => 'Sapang bato - Angeles',
                 'terminal' => 'N/A',
                 'created_at' => now(),
@@ -84,7 +84,7 @@ class VehicleSeeder extends Seeder
             [
                 'id' => 9,
                 'category_id' => 1,
-                'name' => 'jeepney I',
+                'name' => 'Sunset',
                 'routes' => 'Sunset - Nepo',
                 'terminal' => 'N/A',
                 'created_at' => now(),
@@ -92,7 +92,7 @@ class VehicleSeeder extends Seeder
             [
                 'id' => 10,
                 'category_id' => 1,
-                'name' => 'jeepney J',
+                'name' => 'Villa Pampang',
                 'routes' => 'Villa - Pampanga',
                 'terminal' => 'N/A',
                 'created_at' => now(),
@@ -100,7 +100,7 @@ class VehicleSeeder extends Seeder
             [
                 'id' => 11,
                 'category_id' => 1,
-                'name' => 'jeepney K',
+                'name' => 'Capaya',
                 'routes' => 'Capaya - Angeles',
                 'terminal' => 'N/A',
                 'created_at' => now(),

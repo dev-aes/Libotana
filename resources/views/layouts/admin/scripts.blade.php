@@ -19,5 +19,6 @@
 <script src="{{ asset('assets/js/utils/filepond-plugin-file-validate-type.js') }}"></script>
 <script src="{{ asset('assets/js/utils/toastr.min.js') }}"></script> {{-- Notif --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script> {{-- Chart --}}
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script> {{-- Lightbox --}}
 <script src="{{ asset('assets/js/shared/utils.js') }}"></script> {{-- Utils --}}
 <script src="{{ asset('assets/js/shared/crud.js') }}"></script>

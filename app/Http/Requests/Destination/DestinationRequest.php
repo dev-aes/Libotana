@@ -13,7 +13,7 @@ class DestinationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,32 @@ class DestinationRequest extends FormRequest
      */
     public function rules()
     {
+        return match ($this->method()) {
+
+            'POST' => [
+                'title' => ['required', 'unique:destinations,title'],
+                'address' => ['required'],
+                'latitude' => ['required'],
+                'longitude' => ['required'],
+                'history' => ['required'],
+                'featured_photo' => ['required'],
+            ],
+            'PUT' => [
+                'title' => ['required', \Illuminate\Validation\Rule::unique('destinations')->ignore($this->destination)],
+                'address' => ['required'],
+                'latitude' => ['required'],
+                'longitude' => ['required'],
+                'history' => ['required'],
+                'featured_photo' => ['sometimes'],
+            ]
+        };
+    }
+
+    public function messages()
+    {
         return [
-            //
+            'title.unique' => 'The title already existing.',
+            'featured_photo.required' => 'Please upload atleast one featured photo', 
         ];
     }
 }

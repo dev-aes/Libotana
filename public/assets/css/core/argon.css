@@ -5319,7 +5319,7 @@ input[type="button"].btn-block {
 
     padding-right: 0.5rem;
 
-    content: "-";
+    content: "/";
 
     color: #8898aa;
 }
