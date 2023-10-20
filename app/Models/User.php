@@ -74,12 +74,12 @@ class User extends Authenticatable implements HasMedia
 
     public function getAvatarProfileAttribute()
     {
-        return $this->getFirstMedia('avatar_image')->getUrl('avatar');
+        return $this->getFirstMedia('avatar_image')?->getUrl('avatar');
     }
     
     public function getAvatarThumbnailAttribute()
     {
-        return $this->getFirstMedia('avatar_image')->getUrl('thumbnail');
+        return $this->getFirstMedia('avatar_image')?->getUrl('thumbnail');
     }
 
     // ========================== Custom Methods ======================================================
@@ -100,5 +100,28 @@ class User extends Authenticatable implements HasMedia
     public function hasRole($role)
     {
        return $this->role()->where('name', $role)->first() ? true : false;
+    }
+
+
+    // ========================== Scope ======================================================
+
+    public function scopeByRole($query, $role)
+    {
+        return is_array($role) ? $query->whereIn('role_id', $role) : $query->whereRelation('role', 'name', $role);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_activated', true);
+    }
+    
+    public function scopeInactive($query)
+    {
+        return $query->where('is_activated', false);
+    }
+
+    public function scopeNotAdmin($query)
+    {
+        return $query->where('role_id', '!=', Role::ADMIN);
     }
 }

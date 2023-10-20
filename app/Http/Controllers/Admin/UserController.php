@@ -2,37 +2,75 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Role;
 use App\Models\User;
+use App\Mail\AccountUpdate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Mail\AccountUpdate;
 use Illuminate\Support\Facades\Mail;
+use Yajra\DataTables\Facades\DataTables;
+use App\Http\Resources\User\UserResource;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return view('admin.user.index', [
-            'users' => User::whereRelation('role', 'name', '!=', 'admin')->paginate(10)
-        ]);
+        if(request()->ajax())
+        {
+            $users = UserResource::collection(User::with('role')->notAdmin()->get());
+
+            return DataTables::of($users)
+            ->addIndexColumn()
+            ->addColumn('actions', function($row)
+            {
+                $new_row = collect($row);
+
+                $btn = "
+                <div class='dropdown'>
+                    <a class='btn btn-sm btn-icon-only text-light' href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                    <i class='fas fa-ellipsis-v'></i>
+                    </a>
+                    <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>";
+
+                    if ($row['is_activated'] == false) {
+                        $btn .= "
+                                <a class='dropdown-item' href='javascript:void(0)' 
+                                onclick='crud_activate_deactivate($new_row[id], `admin.users.update` , `activate`, `.user_dt`, `Activate this Account`)'>Activate Account</a>";
+                    } else {
+                        $btn .= "
+                                <a class='dropdown-item' href='javascript:void(0)' 
+                                onclick='crud_activate_deactivate($new_row[id], `admin.users.update` , `deactivate`, `.user_dt`, `Deactivate this Account`)'>Deactivate Account</a>";
+                    }
+
+                    $btn.=    "<a class='dropdown-item' href='javascript:void(0)' onclick='c_destroy($new_row[id],`admin.users.destroy`,`.user_dt`)'>Delete</a>
+                    </div>
+                </div> ";
+
+               return $btn;
+           })
+            ->rawColumns(['actions'])
+            ->make(true);
+        }
+
+        return view('admin.user.index');
     }
 
     public function update(Request $request, User $user)
     {
-        match ($request->status) {
-            'activate' => $user->update(['is_activated' => true]),
-            'deactivate' => $user->update(['is_activated' => false]),
-        };
+        if($request->option)
+        {
+            $request->option == 'activate' ? $user->update(['is_activated' => true]) : $user->update(['is_activated' => false]);
 
-        Mail::to($user)->send(new AccountUpdate(user: $user, option: $request->status));// notify email
+            Mail::to($user)->send(new AccountUpdate($user));  // email user
+        }
 
-        return back()->with('success', "User Account $request->status Successfully");
+        return true;
     }
 
     public function destroy(User $user)
     {
         $user->delete();
 
-        return back()->with('success', "User Account Deleted Successfully");
+        return $this->res(['success' => 'User Acount Deleted Successfully']);
     }
 }

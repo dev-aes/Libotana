@@ -1,16 +1,15 @@
 {{-- blade-formatter-disable --}}
 @component('mail::message')
-# Account Update
 
-@if ($option == 'activate')
+@if ($user->is_activated == false)
 Dear {{ $user->name }}, <br> <br>
-Thank you for waiting. Your account is now reactivated. You can now use your ISKOOL Account to access our application.
+Thank you for waiting. Your account is now reactivated. You can now use your {{ config('app.name') }} Account to access our application.
 @endif
 
-@if ($option == 'deactivate')
+@if ($user->is_activated == true)
 Dear {{ $user->name }}, <br> <br>
-Unfortunatetly there are circumstances that you did not totally comply and the administrator choses to deactivate
-your ISKOOL Account. Further Questions? you can email us at iskool.pup@gmail.com
+Unfortunatetly there are circumstances that you did not totally comply and the administrator chooses to deactivate
+your {{ config('app.name') }} Account. Any Questions? you can email us at {{ config('mail.from.address') }}
 @endif
 
 @component('mail::button', ['url' => $url, 'color' => 'primary'])
@@ -20,3 +19,7 @@ Redirect
 Thanks,<br>
 {{ config('app.name') }}
 @endcomponent
+
+
+
+

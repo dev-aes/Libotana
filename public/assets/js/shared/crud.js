@@ -1,9 +1,19 @@
 //===============================================================================
 // crud function
-
-async function c_index(dt, route, column, print_option = "") {
-    if (print_option) {
-        $(dt).DataTable({
+function c_index(
+    dt,
+    route,
+    column,
+    print_option = "",
+    filterable = "",
+    order = ""
+) {
+    if (print_option && print_option !== null) {
+        if (filterable !== "") {
+            $(dt).DataTable().clear();
+            $(dt).DataTable().destroy();
+        }
+        return $(dt).DataTable({
             lengthChange: true,
             processing: true,
             serverSide: true,
@@ -11,7 +21,8 @@ async function c_index(dt, route, column, print_option = "") {
             autoWidth: false,
             ajax: route,
             columns: column,
-            dom: `<"d-md-flex" <l><B> <"ml-0 ml-md-auto"f> > trip`,
+            order: order,
+            // dom: `<"d-md-flex" <l><B> <"ml-0 ml-md-auto"f> > trip`,
             pagingType: "numbers",
             buttons: {
                 dom: {
@@ -42,33 +53,21 @@ async function c_index(dt, route, column, print_option = "") {
             },
         });
     } else {
-        $(dt).DataTable({
+        if (filterable == true) {
+            $(dt).DataTable().clear();
+            $(dt).DataTable().destroy();
+        }
+        return $(dt).DataTable({
             processing: true,
             serverSide: true,
             retrieve: true,
             autoWidth: false,
             ajax: route,
             columns: column,
-            dom: `<"d-md-flex" <l><B> <"ml-0 ml-md-auto"f> > trip`,
-            buttons: {
-                dom: {
-                    button: {
-                        className: "btn btn-dark btn-sm btn-rounded mb-2",
-                    },
-                },
-                buttons: [
-                    "copyHtml5",
-                    "excelHtml5",
-                    "csvHtml5",
-                    "pdfHtml5",
-                    "print",
-                ],
-                position: "bottom",
-            },
+            pagingType: "numbers",
         });
     }
 }
-
 // activate - deactivate status
 function crud_activate_deactivate(id, route_name, value, dt, msg, opt = "") {
     Swal.fire({
@@ -146,7 +145,7 @@ function toggle_modal(modal, form, modal_title, buttons, opt = "") {
     $(modal_title[0]).html(
         `${modal_title[1]} <i class="fas fa-plus-circle ms-2"></i> `
     );
-    $(".modal-header").removeClass("bg-primary").addClass("bg-dark");
+    $(".modal-header").removeClass("bg-primary").addClass("bg-primary");
     $(buttons[0]).css("display", "block"); // add button
     $(buttons[1]).css("display", "none"); // update button
 }
@@ -229,9 +228,9 @@ function c_edit(modal, form, modal_title, buttons, model, opt = "") {
     $(modal).modal("show");
     $(".yes").attr("checked", false); // clear first
     $(".no").attr("checked", false);
-    $(".modal-header").removeClass("bg-dark").addClass("bg-primary");
+    $(".modal-header").removeClass("bg-primary").addClass("bg-primary");
     $(modal_title[0]).html(
-        `${modal_title[1]} <i class="fas fa-edit ms-1"></i> `
+        `${modal_title[1]} <i class="fas fa-edit ml-1"></i> `
     );
     $(buttons[0]).css("display", "none"); // add button
     $(buttons[1]).css("display", "block").attr("data-id", model.id); // show update button and append a model id to it

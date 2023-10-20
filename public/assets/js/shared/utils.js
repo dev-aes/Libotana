@@ -2,6 +2,21 @@
 // Global Fn()
 
 /**
+ * capitalize input
+ * @param {*} event
+ */
+function capitalizeInput(event) {
+    var input = event.target;
+    var words = input.value.split(" ");
+
+    for (var i = 0; i < words.length; i++) {
+        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    }
+
+    input.value = words.join(" ");
+}
+
+/**
  * convert html table to DataTable (Client Side)
  */
 function convertToDataTable(dt, opt = "") {
@@ -85,6 +100,20 @@ function calDateAgo(dString = null) {
 }
 
 /**
+ * export chart to image
+ */
+function downloadChart(el, title) {
+    /*Get image of canvas element*/
+    var chart_url_base64 = document.getElementById(el).toDataURL("image/jpg");
+
+    /*create download button */
+    var download_button = document.createElement("a");
+    download_button.href = chart_url_base64;
+    download_button.download = title;
+    download_button.click();
+}
+
+/**
  * handle display of data to form.selected input element
  */
 function displayDataToSelectInputField(values, column, opt = "") {
@@ -124,6 +153,10 @@ function displayDataToSelectInputField(values, column, opt = "") {
  * format Date Object
  */
 function formatDate(date, opt) {
+    if (!date) {
+        return "";
+    }
+
     if (opt == "full") {
         const formatted_date = new Date(date);
         return formatted_date.toLocaleDateString();
@@ -204,13 +237,43 @@ function getColumnValue(column, value) {
 /**
  * handle null avatar
  */
-function handleNullImage(img, with_path = "", width = "75") {
+function handleNullAvatar(img, with_path = "", width = "75") {
     if (img && with_path) {
-        return `<img class='img-thumbnail' src='/${with_path}/${img}' width='${width}' id="show_img">`;
+        return `<a href='/${with_path}/${img}' class='glightbox'><img class='img-fluid rounded-circle' src='/${with_path}/${img}' width='${width}' alt='image'></a>`;
     } else if (img && with_path == "") {
-        return `<img class='img-thumbnail' src='${img}' width='${width}' id="show_img">`;
+        return `<a href="${img}" class="glightbox">
+                    <img class="img-fluid rounded-circle" src="${img}" width="50" alt="image">
+                </a>`;
     } else {
-        return `<img class='img-thumbnail' src='/img/noimg.svg' width='${width}' id="show_img">`;
+        return `<img class='img-fluid rounded-circle' src='/img/noimg.svg' width='${width}' alt='image'>`;
+    }
+}
+
+/**
+ * handle null avatar
+ */
+function handlleNullAvatarForPet(img, with_path = "", width = "75") {
+    if (img && with_path) {
+        return `<a href='/${with_path}/${img}' class='glightbox'><img class='img-fluid rounded-circle' src='/${with_path}/${img}' width='${width}' alt='image'></a>`;
+    } else if (img && with_path == "") {
+        return `<a href="${img}" class="glightbox">
+                    <img class="img-fluid rounded-circle" src="${img}" width="50" alt="image">
+                </a>`;
+    } else {
+        return `<img class='img-fluid rounded-circle' src='/img/paw.png' width='${width}' alt='image'>`;
+    }
+}
+
+/**
+ * handle null image
+ */
+function handleCareImage(img, with_path = "", width = "75") {
+    if (img && with_path) {
+        return `<img class='img-fluid' src='/${with_path}/${img}' width='${width}' alt='image'>`;
+    } else if (img && with_path == "") {
+        return `<img class="img-fluid" src="${img}" width="100" alt="image">`;
+    } else {
+        return `<img class='img-fluid' src='/img/img_not_found.svg' width='${width}' alt='image'>`;
     }
 }
 
@@ -219,11 +282,13 @@ function handleNullImage(img, with_path = "", width = "75") {
  */
 function handleNullImage(img, with_path = "", width = "75") {
     if (img && with_path) {
-        return `<img class='img-thumbnail' src='/${with_path}/${img}' width='${width}' id="show_img">`;
+        return `<a href='/${with_path}/${img}' class='glightbox'><img class='img-fluid' src='/${with_path}/${img}' width='${width}' alt='image'></a>`;
     } else if (img && with_path == "") {
-        return `<img class='img-thumbnail' src='${img}' width='${width}' id="show_img">`;
+        return `<a href="${img}" class="glightbox">
+                    <img class="img-fluid" src="${img}" width="100" alt="image">
+                </a>`;
     } else {
-        return `<img class='img-thumbnail' src='/img/noimg.png' width='${width}' id="show_img">`;
+        return `<img class='img-fluid' src='/img/img_not_found.svg' width='${width}' alt='image'>`;
     }
 }
 
@@ -244,6 +309,25 @@ function handleFileType(file) {
 
     if (docs.includes(file)) {
         return "documents";
+    }
+}
+
+/** handle Rental Status
+ *
+ */
+function handleRentalStatus(status) {
+    if (status === 0) {
+        return `<span class='badge badge-info'>Pending <i class='fas fa-spinner ml-1'></i></span>`;
+    } else if (status === 1) {
+        return `<span class='badge badge-success'>Approved <i class='fas fa-check-circle ml-1'></i></span>`;
+    } else if (status === 2) {
+        return `<span class='badge badge-danger'> Declined <i class='fas fa-times-circle ml-1'></i></span>`;
+    } else if (status === 3) {
+        return `<span class='badge badge-success'> To be Delivered <i class='fas fa-shipping-fast ml-1'></i></span>`;
+    } else if (status === 4) {
+        return `<span class='badge badge-success'> Delivered <i class='fas fa-check-circle ml-1'></i></span>`;
+    } else {
+        return `<span class='badge badge-success'> Returned <i class='fas fa-check-circle ml-1'></i></span>`;
     }
 }
 
@@ -284,14 +368,47 @@ function initiateFilePond(
 }
 
 /**
+ * handle editor - convert to tinyMCEditor
+ */
+function initiateEditor(selector) {
+    tinymce.init({
+        selector: selector,
+        height: 250,
+        placeholder: "Ask a question or post something...",
+        plugins: [
+            "advlist",
+            "autolink",
+            "lists",
+            "link",
+            "charmap",
+            "preview",
+            "anchor",
+            "searchreplace",
+            "visualblocks",
+            "code",
+            "fullscreen",
+            "table",
+            "help",
+            "wordcount",
+            "emoticons",
+        ],
+        toolbar:
+            "undo redo | blocks | " +
+            "bold italic | alignleft aligncenter " +
+            "alignright alignjustify | bullist numlist outdent indent | " +
+            "removeformat | help | emoticons",
+        content_style:
+            "body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
+    });
+}
+
+/**
  * check if the boolean is true || false
  */
 function isTrue(bool) {
-    if (bool) {
-        return `<span class='badge bg-success p-2'>Yes</span>`;
-    } else {
-        return `<span class='badge bg-secondary p-2'>No</span>`;
-    }
+    return bool
+        ? `<span class='badge badge-danger'>No</span>`
+        : `<span class='badge badge-success'>Yes</span>`;
 }
 
 /**
@@ -299,10 +416,10 @@ function isTrue(bool) {
  */
 function isNotEmpty(input) {
     if (input.val() == "") {
-        input.parent(".input-group").addClass("is-invalid");
+        input.addClass("is-invalid");
         return false;
     } else {
-        input.parent(".input-group").removeClass("is-invalid");
+        input.removeClass("is-invalid");
 
         return true;
     }
@@ -311,25 +428,91 @@ function isNotEmpty(input) {
 /**
  * check if the status is approved
  */
-function isApproved(data) {
+function handlePetStatus(data) {
     if (data === 0) {
-        return `<span class='badge bg-info p-2 text-uppercase'>Pending</span>`;
+        return `<span class='badge badge-primary'>Pending <i class='fas fa-spinner ml-1'></i></span>`;
     } else if (data === 1) {
-        return `<span class='badge bg-success text-white p-2 text-uppercase'>Approved</span>`;
+        return `<span class='badge badge-success'>Approved <i class='fas fa-check-circle ml-1'></i></span>`;
     } else {
-        return `<span class='badge bg-danger p-2 text-uppercase'>Canceled</span>`;
+        return `<span class='badge badge-danger'>Declined <i class='fas fa-times-circle ml-1'></i></span>`;
+    }
+}
+
+/**
+ * check if the status is approved
+ */
+function isApproved(status) {
+    if (status === 0) {
+        return `<span class='badge badge-info'>Pending <i class='fas fa-spinner ml-1'></i></span>`;
+    } else if (status === 1) {
+        return `<span class='badge badge-success'>Approved <i class='fas fa-check-circle ml-1'></i></span>`;
+    } else {
+        return `<span class='badge badge-danger'>Declined <i class='fas fa-times-circle ml-1'></i></span>`;
     }
 }
 
 /**
  * check if the status is activated
  */
-function isActivated(data) {
-    if (data === 0) {
-        return `<span class='badge bg-danger p-2 text-uppercase'>Deactivated</span>`;
+function isActivated(bool) {
+    return bool
+        ? `<span class='badge badge-success'>Activated <i class='fas fa-check-circle ml-1'></i></span>`
+        : `<span class='badge badge-danger'>Deactivated</span>`;
+}
+
+/**
+ * check if the gasoline station status is always open
+ */
+function isAlwaysOpen(data) {
+    if (data) {
+        return `<span class='badge badge-success'>Yes</span>`;
     } else {
-        return `<span class='badge bg-success p-2 text-uppercase'>Activated</span>`;
+        return `<span class='badge badge-danger'>No</span>`;
     }
+}
+
+/**
+ * check if the status is available
+ */
+function isAvailable(bool) {
+    return bool
+        ? `<span class='badge badge-success'>Available <i class='fas fa-check-circle ml-1'></i></span>`
+        : `<span class='badge badge-danger'>Occupied <i class='fas fa-times-circle ml-1'></i></span>`;
+}
+
+/**
+ * check if the status is adopted
+ */
+function isAdopted(bool) {
+    return bool == true
+        ? `<span class='badge badge-success'>Adopted <i class='fas fa-check-circle ml-1'></i></span>`
+        : `<span class='badge badge-info'>Open for Adoption <i class='fas fa-spinner ml-1'></i></span>`;
+}
+
+/**
+ * check if the payment method is online or offline
+ */
+function isPaymentMethodOnline(data) {
+    return data
+        ? `<span class='badge badge-success'>Online</span>`
+        : `<span class='badge badge-danger'>Offline</span>`;
+}
+
+/**
+ * check if the appointment is thru online or walkin
+ */
+function isOnline(data) {
+    return data == 1
+        ? `<span class='badge badge-success'>Online</span>`
+        : `<span class='badge badge-primary'>Walk-In</span>`;
+}
+/**
+ * check if the email is verified
+ */
+function isVerified(email_verified_at) {
+    return email_verified_at
+        ? `<span class='badge badge-success'>Verified <i class='fas fa-check-circle ml-1'></i></span>`
+        : `<span class='badge badge-danger'>Unverified</span>`;
 }
 
 /**
@@ -337,6 +520,35 @@ function isActivated(data) {
  */
 function log(response) {
     return console.log(response);
+}
+
+function number_format(
+    number,
+    decimals = 2,
+    decimalSeparator = ".",
+    thousandsSeparator = ","
+) {
+    number = parseFloat(number);
+
+    if (isNaN(number)) {
+        return "NaN";
+    }
+
+    const roundedNumber = number.toFixed(decimals);
+    const parts = roundedNumber.split(".");
+    const integerPart = parts[0];
+    const decimalPart = parts[1];
+
+    const integerWithCommas = integerPart.replace(
+        /\B(?=(\d{3})+(?!\d))/g,
+        thousandsSeparator
+    );
+
+    if (decimals === 0) {
+        return integerWithCommas;
+    } else {
+        return integerWithCommas + decimalSeparator + decimalPart;
+    }
 }
 
 /**
@@ -348,24 +560,31 @@ async function promptDestroy(event, form_element) {
     return res.isConfirmed ? $(form_element).submit() : false;
 }
 
-async function promptAddToSavedPlaces(event, form_element) {
+/**
+ * prompt dialog box before attemptingto saving a model
+ */
+async function promptStore(
+    event,
+    form_element,
+    title = "Do you want to Submit?",
+    subtitle = ""
+) {
     event.preventDefault();
-    const res = await confirm("Do you want to Save Place?", "", "Yes");
-    return res.isConfirmed ? $(form_element).submit() : false;
-}
-
-async function promptRemoveToSavedPlaces(event, form_element) {
-    event.preventDefault();
-    const res = await confirm("Do you want to Remove Saved Place?", "", "Yes");
+    const res = await confirm(title, subtitle, "Yes");
     return res.isConfirmed ? $(form_element).submit() : false;
 }
 
 /**
  * prompt dialog box before attemptingto update a model
  */
-async function promptUpdate(event, form_element) {
+async function promptUpdate(
+    event,
+    form_element,
+    title = "Do you want to Update?",
+    subtitle = ""
+) {
     event.preventDefault();
-    const res = await confirm("Do you want to Update?", "", "Yes");
+    const res = await confirm(title, subtitle, "Yes");
     return res.isConfirmed ? $(form_element).submit() : false;
 }
 
