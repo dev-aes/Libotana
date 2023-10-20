@@ -13,7 +13,7 @@ class VehicleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,29 @@ class VehicleRequest extends FormRequest
      */
     public function rules()
     {
+        return match($this->method()) {
+            
+            'POST' => [
+                'category_id' => ['required'],
+                'name' => ['required', 'unique:vehicles,name'],
+                'routes' => ['required'],
+            ],
+            'PUT' => [
+                'category_id' => ['required'],
+                'name' => ['required', \Illuminate\Validation\Rule::unique('vehicles')->ignore($this->vehicle)],
+                'routes' => ['required'],
+
+            ],
+        };
+    }
+
+    public function messages()
+    {
         return [
-            //
+            'name.required' => 'The model name field is required.',
+            'category_id.required' => 'The category field is required.',
+            'featured_photo.required' => 'Please upload a featured photo.',
+            'name.unique' => 'The name already existing.',
         ];
     }
 }

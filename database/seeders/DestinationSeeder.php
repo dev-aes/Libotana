@@ -113,7 +113,7 @@ class DestinationSeeder extends Seeder
             ->preservingOriginal()
             ->toMediaCollection('featured_photo');
 
-            $service->log_activity(model:$destination, event:'added', model_name: 'User', model_property_name: $destination->title);
+            $service->log_activity(model:$destination, event:'added', model_name: 'Destination', model_property_name: $destination->title);
         });
     }
 }

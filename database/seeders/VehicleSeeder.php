@@ -181,8 +181,24 @@ class VehicleSeeder extends Seeder
 
         Vehicle::insert($vehicles);
 
-        Vehicle::all()->each(fn(
-            $vehicle) => $service->log_activity(model:$vehicle, event:'added', model_name: 'Vehicle', model_property_name: $vehicle->name)
-        );
+        Vehicle::all()->each(function($vehicle) use($service){
+            
+          if($vehicle->category_id == 1)
+          {
+            $vehicle
+            ->addMedia(public_path("/img/tmp_files/vehicles/jeepney.jpg"))
+            ->preservingOriginal()
+            ->toMediaCollection('featured_photo');
+          }
+          else
+          {
+            $vehicle
+            ->addMedia(public_path("/img/tmp_files/vehicles/tricycle.jpg"))
+            ->preservingOriginal()
+            ->toMediaCollection('featured_photo');
+          }
+
+            $service->log_activity(model:$vehicle, event:'added', model_name: 'Vehicle', model_property_name: $vehicle->name);
+        });
     }
 }

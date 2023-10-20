@@ -23,7 +23,8 @@ use App\Http\Controllers\Admin\{
     ActivityLogController,
     DashboardController,
     CategoryController,
-    UserController
+    UserController,
+    VehicleController
 };
 
 
@@ -51,6 +52,7 @@ Route::get('/cache', function () {
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'admin.'],function() {
     Route::get('dashboard', DashboardController::class)->name('dashboard.index');
     Route::resource('categories', CategoryController::class);
+    Route::resource('vehicles', VehicleController::class);
     
     Route::resource('users', UserController::class);
 

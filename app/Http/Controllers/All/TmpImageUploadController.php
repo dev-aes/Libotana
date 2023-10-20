@@ -12,7 +12,7 @@ class TmpImageUploadController extends Controller
 {
     public function store(Request $request)
     {
-        if($request->hasFile('image') || $request->hasFile('avatar') || $request->hasFile('documents')) 
+        if($request->hasFile('image') || $request->hasFile('featured_photo') || $request->hasFile('avatar') || $request->hasFile('documents')) 
         {
             // if its an array of images
             if(is_array($request->image)) 
@@ -52,7 +52,7 @@ class TmpImageUploadController extends Controller
             
             else
             {
-                $image = $request->image ?? $request->avatar;
+                $image = $request->image ?? $request->featured_photo ?? $request->avatar;
 
                 $image_name = $image->hashName(); // hashed name of an image ( Unique)
     

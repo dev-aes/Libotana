@@ -41,44 +41,40 @@
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
                         </li>
+
+
                         <li class="nav-item">
-                            <a class="nav-link" href="#dropdown" data-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="navbar-tables" id="dropdown_nav">
-                                <i class="fas fa-map-marker-alt"></i>
+                            <a class="nav-link @if (Route::is('admin.categories.index') || Route::is('admin.vehicles.*')) active @endif"
+                                href="#to_car_management" data-toggle="collapse" role="button" aria-expanded="false"
+                                aria-controls="navbar-tables">
+                                <i class="fas fa-car"></i>
                                 <span class="nav-link-text">
-                                    Dropdown
+                                    Vehicle Management
                                 </span>
                             </a>
-                            <div class="collapse" id="dropdown">
+                            <div class="collapse @if (Route::is('admin.categories.index') || Route::is('admin.vehicles.*')) show @endif" id="to_car_management">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link" id="a">
-                                            Item A
+                                        <a href="{{ route('admin.categories.index') }}"
+                                            class="nav-link @if (Route::is('admin.categories.index')) text-primary @endif">
+                                            Category
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link" id="b">
-                                            Item B
+                                        <a href="{{ route('admin.vehicles.index') }}"
+                                            class="nav-link @if (Route::is('admin.vehicles.*')) text-primary @endif">
+                                            All Vehicle
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
 
-
                         <li class="nav-item">
                             <a class="nav-link @if (Route::is('admin.users.*')) active @endif"
                                 href="{{ route('admin.users.index') }}">
                                 <i class="fas fa-user-cog"></i>
                                 <span class="nav-link-text">Auth Management</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link @if (Route::is('admin.categories.*')) active @endif"
-                                href="{{ route('admin.categories.index') }}">
-                                <i class="fas fa-tag"></i>
-                                <span class="nav-link-text">Category</span>
                             </a>
                         </li>
 

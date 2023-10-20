@@ -50,6 +50,46 @@ $(() => {
         c_index($(".category_dt"), route("admin.categories.index"), columns);
     }
 
+    // Car
+    if (window.location.href === route("admin.vehicles.index")) {
+        const columns = [
+            {
+                data: "id",
+                render(data, type, row) {
+                    return row.DT_RowIndex;
+                },
+            },
+            {
+                data: "featured_photo",
+                render(data, type, row) {
+                    let route_show = route("admin.vehicles.show", row.id);
+                    return `<a href='${route_show}'> ${handleCareImage(
+                        data,
+                        "",
+                        150
+                    )} </a>`;
+                },
+            },
+            { data: "category" },
+            {
+                data: "name",
+                render(data, type, row) {
+                    let route_show = route("admin.vehicles.show", row.id);
+
+                    return `<a href='${route_show}'>${data}</a>`;
+                },
+            },
+            {
+                data: "created_at",
+                render(data) {
+                    return formatDate(data, "full");
+                },
+            },
+            { data: "actions", orderable: false, searchable: false },
+        ];
+        c_index($(".vehicle_dt"), route("admin.vehicles.index"), columns);
+    }
+
     //User;
     if (window.location.href === route("admin.users.index")) {
         const columns = [
