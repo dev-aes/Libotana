@@ -13,4 +13,9 @@ class Search extends Model
     BelongsToDestination,
     BelongsToUser,
     HasFactory;
+
+    protected $fillable = [
+        'destination_id',
+        'user_id',
+    ];
 }

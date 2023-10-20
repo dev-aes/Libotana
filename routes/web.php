@@ -27,8 +27,9 @@ use App\Http\Controllers\Admin\{
     UserController,
     VehicleController
 };
-
-
+use App\Http\Controllers\User\DestinationController as UserDestinationController;
+use App\Http\Controllers\User\NearestDestinationController;
+use App\Http\Controllers\User\VehicleController as UserVehicleController;
 
 Route::get('/', function () {
     return to_route('auth.login');
@@ -63,6 +64,17 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get('activity_logs', ActivityLogController::class)->name('activity_logs.index');
 });
 
+
+// User 
+Route::group(['middleware' => ['auth', 'user'], 'prefix' => 'user', 'as' => 'user.'],function() {
+
+    Route::resource('destinations', UserDestinationController::class)->only('index', 'show');
+    Route::post('/get_nearest_destinations', NearestDestinationController::class)->name('nearest_destinations.get');
+
+    Route::resource('vehicles', UserVehicleController::class)->only('index', 'show');
+
+
+});
 
 
 // Shared Controller

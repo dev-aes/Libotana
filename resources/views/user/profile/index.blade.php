@@ -1,4 +1,4 @@
-@extends('layouts.student.app')
+@extends('layouts.user.app')
 
 @section('title', 'Manage Profile')
 
@@ -19,14 +19,12 @@
 
                 <div class="form-group mb-3 ">
                     <label class="form-label">Name</label>
-                    <input type="text" class="form-control form-control-sm" value="{{ auth()->user()->name }}"
-                        readonly>
+                    <input type="text" class="form-control form-control-sm" value="{{ auth()->user()->name }}" readonly>
                 </div>
 
                 <div class="form-group mb-3 ">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control form-control-sm" value="{{ auth()->user()->email }}"
-                        readonly>
+                    <input type="email" class="form-control form-control-sm" value="{{ auth()->user()->email }}" readonly>
                 </div>
 
                 <div class="form-group mb-3 ">

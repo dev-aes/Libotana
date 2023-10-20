@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasManySearch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,6 +12,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Destination extends Model implements HasMedia
 {
     use 
+    HasManySearch,
     HasFactory,
     InteractsWithMedia
     ;

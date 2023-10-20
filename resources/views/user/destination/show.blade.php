@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.user.app')
 
 @section('title', "$app_name | $destination->title")
 
@@ -14,7 +14,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('admin.destinations.index') }}">
+                <a href="{{ route('user.destinations.index') }}">
                     All Tourist Destination
                 </a>
             </li>
@@ -87,8 +87,7 @@
                                         alt="featured photo">
                                 </div>
                                 <div class="card-footer border-0">
-                                    <a class="h4 font-weight-normal"
-                                        href="{{ route('admin.vehicles.show', $vehicle) }}">
+                                    <a class="h4 font-weight-normal" href="{{ route('user.vehicles.show', $vehicle) }}">
                                         {{ $vehicle->name }}
                                     </a>
                                     <br><br>

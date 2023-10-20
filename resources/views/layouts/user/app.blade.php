@@ -3,11 +3,11 @@
 
 <head>
     <title>@yield('title', 'Dashboard')</title>
-    @include('layouts.guest.styles')
+    @include('layouts.user.styles')
 </head>
 
 <body class="">
-    @include('layouts.guest.modal')
+    @include('layouts.user.modal')
     {{-- Side Nav --}}
     <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
         <div class="scrollbar-inner">
@@ -34,41 +34,18 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav mt-1 mt-md-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('places.index') }}" id="home_nav">
+                            <a class="nav-link @if (Route::is('user.destinations.*')) active @endif"
+                                href="{{ route('user.destinations.index') }}">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span class="nav-link-text">Home</span>
+                                <span class="nav-link-text">Tourist Destinations</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('saved_places.index') }}" id="saved_place_nav">
                                 <i class="far fa-bookmark"></i>
                                 <span class="nav-link-text">Saved Places</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#faculty_management" data-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="navbar-tables" id="faculty_nav">
-                                <i class="fas fa-school"></i>
-                                <span class="nav-link-text">
-                                    Faculty Management
-                                </span>
-                            </a>
-                            <div class="collapse" id="faculty_management">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{ route('campuses.index') }}" class="nav-link" id="campus">
-                                            Campus
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('faculties.index') }}" class="nav-link" id="faculty">
-                                            Faculty
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </li>
+                        </li> --}}
                     </ul>
                     <!-- Divider -->
                     <hr class="my-3">
@@ -153,7 +130,7 @@
     </div>
     {{-- End Main Content --}}
 
-    @include('layouts.guest.scripts')
+    @include('layouts.user.scripts')
     <script src="{{ asset('assets/js/guest/script.js') }}"></script>
     @yield('script')
     @routes

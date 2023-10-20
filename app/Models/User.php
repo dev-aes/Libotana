@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Role;
+use App\Traits\HasManySearch;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -15,7 +16,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasFactory, Notifiable , InteractsWithMedia;
+    use 
+    HasManySearch,
+    HasFactory, 
+    Notifiable , 
+    InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
