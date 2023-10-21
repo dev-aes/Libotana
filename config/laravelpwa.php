@@ -1,18 +1,18 @@
 <?php
 
 return [
-    'name' => 'ISKOOL: A Mobile Navigation System App in Polytechnic University of the Philippines',
+    'name' => 'Libotana: A Travel Navigation App in the City of Pampanga',
     'manifest' => [
-        'name' => env('APP_NAME', 'ISKOOL: A Mobile Navigation System App in PUP'),
-        'short_name' => 'ISKOOL: A Mobile Navigation System App in PUP',
+        'name' => env('APP_NAME', 'Libotana: A Travel Navigation App in the City of Pampanga'),
+        'short_name' => 'Libotana: A Travel Navigation App in the City of Pampanga',
         'start_url' => '/',
         'id' => '/login',
-        'background_color' => '#7E0000',
-        'theme_color' => '#7E0000',
+        'background_color' => '#0b4972',
+        'theme_color' => '#0b4972',
         'display' => 'standalone',
         'orientation'=> 'any',
         'status_bar'=> 'black',
-        'description' => 'Fur-fect: A mobile and web-based online platform for Pet lovers',
+        'description' => 'Libotana: A Travel Navigation App in the City of Pampanga',
         'screenshots' => [
             [
                 'src' => '/img/pwa/screenshots/1.jpg',
@@ -34,13 +34,6 @@ return [
                 'type' => 'image/jpg',
                 'platform' => 'narrow',
                 'label' => 'Community',
-            ],
-            [
-                'src' => '/img/pwa/screenshots/4.jpg',
-                'sizes' => '1080x1920',
-                'type' => 'image/jpg',
-                'platform' => 'narrow',
-                'label' => 'Extras',
             ],
         ],
         'icons' => [
