@@ -77,8 +77,13 @@
 
                 </div>
                 <hr>
-                <h3>Transport Vehicles</h3>
-                <div class="row">
+                <h3>List of Transport Vehicles
+
+                    <a class="btn btn-sm btn-primary float-right"
+                        href="{{ route('admin.destinations.vehicles.create', $destination) }}">Manage Vehicle <i
+                            class="fas fa-plus-circle ml-1"></i></a>
+                </h3>
+                <div class="row mt-3">
                     @forelse ($destination->vehicles as $vehicle)
                         <div class="col-6 col-md-4 px-2 d-flex align-self-stretch">
                             <div class="card w-100">

@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\{
     DashboardController,
     CategoryController,
     DestinationController,
+    DestinationVehicleController,
     UserController,
     VehicleController
 };
@@ -56,6 +57,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::resource('categories', CategoryController::class);
     Route::resource('vehicles', VehicleController::class);
     Route::resource('destinations', DestinationController::class);
+    Route::resource('destinations.vehicles', DestinationVehicleController::class)->only('create', 'store');
     
     Route::resource('users', UserController::class);
 
