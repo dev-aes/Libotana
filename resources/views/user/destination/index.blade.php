@@ -47,6 +47,11 @@
                     Nearest Tourist Destination <i class="fas fa-map-marker-alt ml-1 text-danger"></i></a>
             </div>
 
+
+            <div id="user-location">
+                <!-- User's live location will be displayed here -->
+            </div>
+
             <form action="{{ route('user.destinations.index') }}" method="GET" id="destination">
                 <div class="input-group">
                     <select class="selectpicker show-tick" data-style='btn-white text-primary' data-live-search="true"
@@ -194,7 +199,7 @@
                                             output +=
                                                 `<li class='list-group-item d-flex justify-content-between align-items-center'>
                                             <span class="badge badge-primary badge-pill">
-                                                            ${vehicle.name}
+                                                            ${vehicle.name} - ${vehicle.category.name}
                                             </span>
                                         </li>`
                                         });
@@ -323,7 +328,7 @@
                             output +=
                                 `<li class='list-group-item d-flex justify-content-between align-items-center'>
                                             <span class="badge badge-primary badge-pill">
-                                                            ${vehicle.name}
+                                                            ${vehicle.name} - ${vehicle.category.name}
                                             </span>
                                         </li>`
                         });
@@ -418,6 +423,40 @@
     @endif
 
     <script>
+        function updateUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const current_location = {
+                            lat: parseFloat(position.coords.latitude),
+                            lng: parseFloat(position.coords.longitude),
+                        };
+
+                        const userLocationElement = document.getElementById('user-location');
+                        userLocationElement.textContent =
+                            `Current Location: Lat ${current_location.lat}, Lng ${current_location.lng}`;
+
+                        // You can also update the map or perform any other actions based on the user's live location here.
+                    },
+                    () => {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    }
+                );
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+        // Call updateUserLocation every 30 seconds (adjust the interval as needed)
+
+        // setInterval(() => {
+        //     updateUserLocation();
+
+        //     log('loaded');
+        // }, 10000);
+
+
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
             infoWindow.setPosition(pos);
             infoWindow.setContent(

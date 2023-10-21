@@ -69,11 +69,11 @@
                 </h3>
 
                 <div>
-                    {{ $vehicle->routes }}
+                    Routes: {{ $vehicle->routes }}
 
                 </div>
                 <hr>
-                <h3>Tourist Destinations <i class="fas fa-map-marked-alt ml-1"></i></h3> <br>
+                <h3>Traveled Tourist Destinations <i class="fas fa-map-marked-alt ml-1"></i></h3> <br>
                 <div class="row">
                     @forelse ($vehicle->destinations as $destination)
                         <div class="col-6 col-md-4 px-2 d-flex align-self-stretch">

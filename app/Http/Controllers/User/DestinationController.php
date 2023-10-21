@@ -13,9 +13,9 @@ class DestinationController extends Controller
     {
         $search_destination = $request->destination_id;
 
-        $destinations = Destination::with('vehicles')->get();
+        $destinations = Destination::with('vehicles.category')->get();
 
-        $selected_destination = $search_destination ? Destination::with('vehicles')->whereId($search_destination)->first() : null;
+        $selected_destination = $search_destination ? Destination::with('vehicles.category')->whereId($search_destination)->first() : null;
 
         $selected_destination ? auth()->user()->searches()->firstOrCreate(['destination_id' => $selected_destination->id]) : '';   // saved search destination
 

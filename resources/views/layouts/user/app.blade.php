@@ -40,6 +40,13 @@
                                 <span class="nav-link-text">Tourist Destinations</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if (Route::is('user.vehicles.*')) active @endif"
+                                href="{{ route('user.vehicles.index') }}">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span class="nav-link-text">Public Vehicles</span>
+                            </a>
+                        </li>
                         {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('saved_places.index') }}" id="saved_place_nav">
                                 <i class="far fa-bookmark"></i>

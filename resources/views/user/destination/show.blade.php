@@ -26,7 +26,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-body">
+            <div class="card card-body px-3 py-0">
 
                 {{-- Start Carousel --}}
                 <div id="other_featured_photos" class="carousel slide" data-ride="carousel">
@@ -77,7 +77,7 @@
 
                 </div>
                 <hr>
-                <h3>Transport Vehicles</h3>
+                <h3>Available Transport Vehicles</h3>
                 <div class="row">
                     @forelse ($destination->vehicles as $vehicle)
                         <div class="col-6 col-md-4 px-2 d-flex align-self-stretch">
@@ -181,8 +181,10 @@
 
         content = `<h3 class='font-weight-normal'>${config.destination.title} <i class='fas fa-map-pin text-danger ml-1'></i></h3>
                     <h4 class='font-weight-normal'>Direction: ${config.destination.address} </h4>
-                    <h4 class='font-weight-normal'>History: ${config.destination.history} <i class='fas fa-map-marker-alt text-danger ml-1'></i></h4>
+                  
             `;
+
+        // <h4 class='font-weight-normal'>History: ${config.destination.history} <i class='fas fa-map-marker-alt text-danger ml-1'></i></h4>
 
 
         if (config.destination !== undefined) {

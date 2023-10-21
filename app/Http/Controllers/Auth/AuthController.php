@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         return match (auth()->user()->role->name) {
             'admin' => to_route('admin.dashboard.index'),
-            'user' => to_route('profile.index'),
+            'user' => to_route('user.destinations.index'),
         };
     }
 
