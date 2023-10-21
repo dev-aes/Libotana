@@ -28,6 +28,8 @@ class DestinationVehicleRequest extends FormRequest
             'vehicle.*' => ['sometimes'],
             'duration' => ['sometimes', 'array'],
             'duration.*' => ['sometimes'],
+            'fare' => ['sometimes', 'array'],
+            'fare.*' => ['sometimes'],
         ];
     }
 }

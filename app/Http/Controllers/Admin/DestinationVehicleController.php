@@ -23,13 +23,25 @@ class DestinationVehicleController extends Controller
     {
         $destination->vehicles()->detach(); // remove all vehicles and populate new vehicles
 
-        foreach(array_combine($request->vehicle, $request->duration) as $vehicle => $duration)
+        foreach($request->vehicle as $index => $vehicle)
         {
-            if(filled($duration) &&  filled($vehicle))
+            if(filled($request->duration[$index]) &&  filled($request->vehicle[$index]) && filled($request->fare[$index]))
             {
-                $destination->vehicles()->attach($vehicle, ['duration' => $duration]);
+                $destination->vehicles()->attach($vehicle, [
+                    'duration' => $request->duration[$index],
+                    'fare' => $request->fare[$index],
+                ]);
             }
+
         }
+
+        // foreach(array_combine($request->vehicle, $request->duration) as $vehicle => $duration)
+        // {
+        //     if(filled($duration) &&  filled($vehicle))
+        //     {
+        //         $destination->vehicles()->attach($vehicle, ['duration' => $duration]);
+        //     }
+        // }
 
         return to_route('admin.destinations.show', $destination)->with(['success' => 'Assigned Vehicle Updated Successfully']);
     }

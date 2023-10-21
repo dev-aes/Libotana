@@ -105,6 +105,10 @@
                                         Travel Duration: {{ $vehicle->pivot->duration }} <i
                                             class="fas fa-clock ml-1"></i>
                                     </small>
+                                    <br>
+                                    <small>
+                                        Estimated Fare: ₱{{ number_format($vehicle->pivot->fare) }}
+                                    </small>
                                 </div>
                             </div>
                         </div>

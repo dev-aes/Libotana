@@ -29,7 +29,7 @@ class Destination extends Model implements HasMedia
     
     public function vehicles():BelongsToMany
     {
-        return $this->belongsToMany(Vehicle::class)->withPivot('duration')->withTimestamps()->using(DestinationVehicle::class);
+        return $this->belongsToMany(Vehicle::class)->withPivot('duration', 'fare')->withTimestamps()->using(DestinationVehicle::class);
     }
 
     // ============================== Accessor & Mutator ==========================================

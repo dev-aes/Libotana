@@ -22,14 +22,17 @@ class DestinationVehicleSeeder extends Seeder
                 'id' => 1,
                 'destination_id' => 1,
                 'vehicle_id' => 1,
-                'duration' => '50 min',
+                'duration' => '30 min',
+                'fare' => 50.00,
                 'created_at' => now(),
             ],
             [
+
                 'id' => 2,
                 'destination_id' => 1,
                 'vehicle_id' => 2,
-                'duration' => '50 min',
+                'duration' => '45 min',
+                'fare' => 120.00,
                 'created_at' => now(),
             ],
             [
@@ -37,6 +40,7 @@ class DestinationVehicleSeeder extends Seeder
                 'destination_id' => 1,
                 'vehicle_id' => 3,
                 'duration' => '50 min',
+                'fare' => 150.00,
                 'created_at' => now(),
             ],
 
@@ -45,7 +49,8 @@ class DestinationVehicleSeeder extends Seeder
                 'id' => 4,
                 'destination_id' => 2,
                 'vehicle_id' => 1,
-                'duration' => '50 min',
+                'duration' => '60 min',
+                'fare' => 200.00,
                 'created_at' => now(),
             ],
         );

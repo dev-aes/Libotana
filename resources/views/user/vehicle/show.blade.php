@@ -26,7 +26,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-body">
+            <div class="card card-body px-3 py-0">
 
                 {{-- Start Carousel --}}
                 <div id="other_featured_photos" class="carousel slide" data-ride="carousel">
@@ -87,9 +87,19 @@
                                         <small>{{ $destination->title }} <i
                                                 class="fas fa-map-pin ml-1 text-danger"></i></small>
                                     </a>
-                                    <br><br>
+                                    <div class="mt-2">
+                                        <small>
+                                            Address: {{ $destination->address }}
+                                        </small>
+                                    </div>
+                                    <br>
                                     <small>
-                                        Address: {{ $destination->address }}
+                                        Travel Duration: {{ $destination->pivot->duration }} <i
+                                            class="fas fa-clock ml-1"></i>
+                                    </small>
+                                    <br>
+                                    <small>
+                                        Estimated Fare: ₱{{ number_format($destination->pivot->fare) }}
                                     </small>
                                 </div>
                             </div>

@@ -29,7 +29,7 @@
                 <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                     <h6 class="navbar-heading p-0 text-muted mt-2 mt-md-0 mb-1">
-                        <span class="docs-normal">{{ auth()->user()->role->name }}</span>
+                        <span class="docs-normal">{{ auth()->user()->name }}</span>
                     </h6>
                     <!-- Nav items -->
                     <ul class="navbar-nav mt-1 mt-md-0">

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('destination_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('vehicle_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('duration');
+            $table->decimal('fare');
             $table->timestamps();
         });
     }

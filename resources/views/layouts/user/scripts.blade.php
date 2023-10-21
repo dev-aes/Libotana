@@ -9,3 +9,11 @@
 <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script> {{-- Lightbox --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script src="{{ asset('assets/js/shared/utils.js') }}"></script>
+<script src="https://www.momentcrm.com/embed"></script>
+<script>
+    MomentCRM('init', {
+        'teamVanityId': 'libotana',
+        'doChat': true,
+        'doTracking': true,
+    });
+</script>

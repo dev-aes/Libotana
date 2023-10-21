@@ -32,7 +32,7 @@
                                 </legend>
                                 <div id="vehicle_input">
                                     <div class="row py-2 align-items-center">
-                                        <div class="col-6">
+                                        <div class="col-3">
                                             <select class="form-control" name="vehicle[]">
                                                 <option value="">Select Vehicle</option>
                                                 @foreach ($vehicles as $vehicle)
@@ -46,6 +46,10 @@
                                             <input class="form-control" type="text" name="duration[]"
                                                 placeholder="Travel Duration (Eg. 30min)" required>
                                         </div>
+                                        <div class="col-3">
+                                            <input class="form-control" type="number" name="fare[]"
+                                                placeholder="Fare Rate / Pamasahe" required>
+                                        </div>
                                         <div class="col-2">
                                             <a href="javascript:void(0)" role="button" onclick="addVehicleInputField()"> <i
                                                     class="fas fa-plus-circle text-success fa-lg"></i></a>
@@ -54,7 +58,7 @@
 
                                     @foreach ($destination->vehicles as $current_vehicle)
                                         <div class="row py-2 align-items-center" id="row_input-{{ $current_vehicle->id }}">
-                                            <div class="col-6">
+                                            <div class="col-3">
                                                 <select class="form-control" name="vehicle[]">
                                                     <option value="">Select Vehicle</option>
                                                     @foreach ($vehicles as $vehicle)
@@ -72,6 +76,13 @@
                                                     placeholder="Travel Duration (Eg. 30min)"
                                                     value="{{ $current_vehicle->pivot->duration }}" required>
                                             </div>
+
+                                            <div class="col-3">
+                                                <input class="form-control" type="number" name="fare[]"
+                                                    placeholder="Fare Rate / Pamasahe"
+                                                    value="{{ $current_vehicle->pivot->fare }}" required>
+                                            </div>
+
                                             <div class="col-2">
                                                 <a href="javascript:void(0)" role="button"
                                                     onclick="removeVehicleInputField({{ $current_vehicle->id }})">
@@ -115,7 +126,7 @@
             let output = `
         
         <div class="row py-2 align-items-center" id='row_input-${id}'>
-                        <div class="col-6">
+                        <div class="col-3">
                             <select class="form-control" name="vehicle[]">
                                  <option value="">Select Vehicle</option>
                                  ${displayVehicleInputField(vehicles)}
@@ -124,9 +135,16 @@
                         <div class="col-4">
                             <input class="form-control" type="text"  name="duration[]" placeholder='Travel Duration (Eg. 30min)' required>
                         </div>
+
+                        <div class="col-3">
+                                            <input class="form-control" type="number" name="fare[]"
+                                                placeholder="Fare Rate / Pamasahe" required>
+                                        </div>
+
                         <div class="col-2">
                             <a href="javascript:void(0)" role="button" onclick="removeVehicleInputField(${id})"> <i class="fas fa-minus-circle text-danger fa-lg"></i></a>
                         </div>
+                        
          </div>
         
         `

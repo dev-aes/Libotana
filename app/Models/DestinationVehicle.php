@@ -15,7 +15,8 @@ class DestinationVehicle extends Pivot
     protected $fillable = [
         'destination_id',
         'vehicle_id',
-        'duration'
+        'duration',
+        'fare',
     ];
 
 }

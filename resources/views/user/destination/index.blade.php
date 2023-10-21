@@ -60,9 +60,10 @@
                         @if ($searches->isNotEmpty())
                             <optgroup label="Search History">
                                 @foreach ($searches as $search)
-                                    <option data-icon='fas fa-map-marker-alt' data-tokens="{{ $search->destination->name }}"
+                                    <option data-icon='fas fa-map-marker-alt'
+                                        data-tokens="{{ $search->destination->title }}"
                                         value="{{ $search->destination_id }}">
-                                        {{ $search->destination->name }}
+                                        {{ $search->destination->title }}
                                     </option>
                                 @endforeach
                             </optgroup>

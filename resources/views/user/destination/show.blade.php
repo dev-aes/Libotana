@@ -77,8 +77,8 @@
 
                 </div>
                 <hr>
-                <h3>Available Transport Vehicles</h3>
-                <div class="row">
+                <h4>Available Transport Vehicles</h4>
+                <div class="row mt-3">
                     @forelse ($destination->vehicles as $vehicle)
                         <div class="col-6 col-md-4 px-2 d-flex align-self-stretch">
                             <div class="card w-100">
@@ -87,17 +87,23 @@
                                         alt="featured photo">
                                 </div>
                                 <div class="card-footer border-0">
-                                    <a class="h4 font-weight-normal" href="{{ route('user.vehicles.show', $vehicle) }}">
+                                    <a class="h5 font-weight-normal text-dark font-weight-bold"
+                                        href="{{ route('user.vehicles.show', $vehicle) }}">
                                         {{ $vehicle->name }}
                                     </a>
-                                    <br><br>
-                                    <small>
-                                        Routes: {{ $vehicle->routes }}
-                                    </small>
+                                    <div class="mt-2">
+                                        <small>
+                                            Routes: {{ $vehicle->routes }}
+                                        </small>
+                                    </div>
                                     <br>
                                     <small>
                                         Travel Duration: {{ $vehicle->pivot->duration }} <i
                                             class="fas fa-clock ml-1"></i>
+                                    </small>
+                                    <br>
+                                    <small>
+                                        Estimated Fare: ₱{{ number_format($vehicle->pivot->fare) }}
                                     </small>
                                 </div>
                             </div>

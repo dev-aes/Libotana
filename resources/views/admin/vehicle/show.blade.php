@@ -69,7 +69,7 @@
                 </h3>
 
                 <div>
-                    {{ $vehicle->routes }}
+                    Routes: {{ $vehicle->routes }}
 
                 </div>
                 <hr>
@@ -90,6 +90,15 @@
                                     <br><br>
                                     <small>
                                         Address: {{ $destination->address }}
+                                    </small>
+                                    <br>
+                                    <small>
+                                        Travel Duration: {{ $destination->pivot->duration }} <i
+                                            class="fas fa-clock ml-1"></i>
+                                    </small>
+                                    <br>
+                                    <small>
+                                        Estimated Fare: ₱{{ number_format($destination->pivot->fare) }}
                                     </small>
                                 </div>
                             </div>
