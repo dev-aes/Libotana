@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-12 col-md-5 pt-2 pt-md-5">
                             <h5 class="text-muted"><span
-                                    class="text-warning font-weight-bold">{{ config('app.name') }}</span> is now available
+                                    class="text-primary font-weight-bold">{{ config('app.name') }}</span> is now available
                                 on mobile phone devices <i class="fas fa-mobile-alt ml-1"></i></h6>
                                 <br>
                                 <!-- Install button, hidden by default -->
