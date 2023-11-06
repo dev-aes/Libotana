@@ -31,6 +31,7 @@
                     <h6 class="navbar-heading p-0 text-muted mt-2 mt-md-0 mb-1">
                         <span class="docs-normal">{{ auth()->user()->name }}</span>
                     </h6>
+
                     <!-- Nav items -->
                     <ul class="navbar-nav mt-1 mt-md-0">
                         <li class="nav-item">
@@ -45,6 +46,13 @@
                                 href="{{ route('user.vehicles.index') }}">
                                 <i class="fas fa-shipping-fast"></i>
                                 <span class="nav-link-text">Public Vehicles</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if (Route::is('user.fares.*')) active @endif"
+                                href="{{ route('user.fares.index') }}">
+                                <i class="fas fa-money-bill"></i>
+                                <span class="nav-link-text">Fare Matrix</span>
                             </a>
                         </li>
                         {{-- <li class="nav-item">

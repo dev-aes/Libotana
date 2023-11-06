@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\{
     VehicleController
 };
 use App\Http\Controllers\User\DestinationController as UserDestinationController;
+use App\Http\Controllers\User\FareController;
 use App\Http\Controllers\User\NearestDestinationController;
 use App\Http\Controllers\User\VehicleController as UserVehicleController;
 
@@ -74,6 +75,7 @@ Route::group(['middleware' => ['auth', 'user'], 'prefix' => 'user', 'as' => 'use
     Route::post('/get_nearest_destinations', NearestDestinationController::class)->name('nearest_destinations.get');
 
     Route::resource('vehicles', UserVehicleController::class)->only('index', 'show');
+    Route::get('fares', FareController::class)->name('fares.index');
 
 
 });

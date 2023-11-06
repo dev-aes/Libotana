@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
        
         $this->call([
 
+            FareSeeder::class,
             CategorySeeder::class,
             VehicleSeeder::class,
             DestinationSeeder::class,
