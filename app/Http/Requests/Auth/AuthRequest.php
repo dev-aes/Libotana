@@ -29,8 +29,8 @@ class AuthRequest extends FormRequest
             'address' => ['required'],
             'contact' => ['required', 'digits:11'],
             'email' => ['required', 'unique:users,email'],
-            'password' => ['required', 'confirmed'],
-            'role_id' => ['required']
+            // 'password' => ['required', 'confirmed'],
+            'password' => ['required', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/'],
         ];
     }
 
@@ -38,6 +38,7 @@ class AuthRequest extends FormRequest
     {
         return [
             'email.unique' => 'The email address has already been taken',
+            'password.regex' => 'The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.',
         ];
     }
 }

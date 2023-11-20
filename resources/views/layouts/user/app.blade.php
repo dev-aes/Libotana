@@ -111,9 +111,9 @@
                                         <img src="{{ handleNullAvatar(auth()->user()->avatar_profile) }}"
                                             class="avatar rounded-circle" alt="Image placeholder">
                                     </span>
-                                    <div class="media-body  ml-2  d-none d-lg-block">
+                                    {{-- <div class="media-body  ml-2  d-none d-lg-block">
                                         <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </a>
                             <div class="dropdown-menu  dropdown-menu-right ">
