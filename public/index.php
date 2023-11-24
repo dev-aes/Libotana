@@ -1,4 +1,6 @@
 <?php
+ 
+ //echo 'Greetings, your website hosting subscription has lapsed. To continue your subscription, please get in touch with Mr.Dev via email at dvocapstoneprojectmaker@gmail.com.';
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
@@ -31,7 +33,7 @@ if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require '/home/u414782032/libotana/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +46,7 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once '/home/u414782032/libotana/bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
