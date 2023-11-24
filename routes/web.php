@@ -46,11 +46,9 @@ Route::get('/cache', function () {
     return 'cache';
 });
 
-// Route::get('/symlink', function () {
-//     symlink('/home/u686793928/iskool/storage/app/public', '/home/u686793928/domains/mainsandbox.com/public_html/sub_iskool/storage');
-// });
-
-
+Route::get('/symlink', function () {
+    symlink('/home/u414782032/libotana/storage/app/public', '/home/u414782032/domains/sitedomain.xyz/public_html/sub_libotana/storage');
+});
 
 // Admin 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'admin.'],function() {
