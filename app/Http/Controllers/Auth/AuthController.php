@@ -47,7 +47,10 @@ class AuthController extends Controller
 
     public function attemptRegister(AuthRequest $request)
     {
-        $user = User::create($request->validated() + [
+        $form_data = $request->validated();
+        $form_data['password'] = bcrypt($request->password);
+                
+        $user = User::create($form_data + [
             'role_id' => \App\Models\Role::USER,
             'verification_token' => Str::uuid(),
         ]);
